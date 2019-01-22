@@ -13,10 +13,10 @@ class Game {
         return this.players.find(player => player.active);
     }
 
-    /** 
-    * Creates two player objects
-    * @return  {Array}    An array of two Player objects.
-    */
+    /**
+     * Creates two player objects
+     * @return  {Array}    An array of two Player objects.
+     */
     createPlayers() {
         const players = [
             new Player('Player 1', 1, '#e15258', true),
@@ -25,8 +25,8 @@ class Game {
         return players;
     }
 
-    /** 
-     * Initializes game. 
+    /**
+     * Initializes game.
      */
     startGame() {
         this.board.drawHTMLBoard();
@@ -35,12 +35,12 @@ class Game {
     }
 
     /**
-    * Branches code, depending on what key player presses
-    * @param   {Object}    e - Keydown event object
-    */
-   handleKeydown(e) {
-       if(this.ready) {
-           if (e.key === 'ArrowLeft') {
+     * Branches code, depending on what key player presses
+     * @param   {Object}    e - Keydown event object
+     */
+    handleKeydown(e) {
+        if (this.ready) {
+            if (e.key === 'ArrowLeft') {
                 // move token left
                 console.log('The key pressed was: ' + e.key);
             } else if (e.key === 'ArrowRight') {
@@ -49,9 +49,31 @@ class Game {
             } else if (e.key === 'ArrowDown') {
                 // move token down
                 console.log('The key pressed was: ' + e.key);
-           }
-       }
-   }
+            }
+        }
+    }
 
+    /**
+     * Switches active player.
+     */
+    switchPlayers() {
+        this.players.forEach(element => {
+            if (element.active === true) {
+                element.active = false;
+            } else {
+                element.active = true;
+            }
+        });
+    }
+
+    /**
+     * Displays game over message.
+     * @param {string} message - Game over message.
+     */
+    gameOver (message) {
+        const gameOverContainer = document.getElementById('game-over');
+        gameOverContainer.textContent(message);
+        gameOverContainer.style.display = 'block';
+    }
 
 }
